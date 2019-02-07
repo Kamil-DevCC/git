@@ -2180,10 +2180,10 @@ static int module_config(int argc, const char **argv, const char *prefix)
 
 	/* Equivalent to ACTION_SET in builtin/config.c */
 	if (argc == 3 || (argc == 2 && command == DO_UNSET)) {
+		const char *value = (argc == 3) ? argv[2] : NULL;
+
 		if (!is_writing_gitmodules_ok())
 			die(_("please make sure that the .gitmodules file is in the working tree"));
-
-		const char *value = (argc == 3) ? argv[2] : NULL;
 		return config_set_in_gitmodules_file_gently(argv[1], value);
 	}
 
