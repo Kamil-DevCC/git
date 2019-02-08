@@ -981,6 +981,21 @@ static void show_combined_header(struct combine_diff_path *elem,
 		printf("%s\n", c_reset);
 	}
 
+	for (i = 0; i < num_parent; i++) {
+		switch (elem->parent[i].status) {
+		case DIFF_STATUS_COPIED:
+			dump_quoted_path("copy from ", "",
+					 elem->parent[i].path.buf,
+					 line_prefix, c_meta, c_reset);
+			break;
+		case DIFF_STATUS_RENAMED:
+			dump_quoted_path("rename from ", "",
+					 elem->parent[i].path.buf,
+					 line_prefix, c_meta, c_reset);
+			break;
+		}
+	}
+
 	if (!show_file_header)
 		return;
 
